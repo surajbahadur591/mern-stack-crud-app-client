@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // paste backend url
-const URL = "http://localhost:8000";
+const URL = "http://localhost:8000" || "https://mern-stack-crud-app-backend.onrender.com";
 
 export const addUserService = async (data) => {
   try {
