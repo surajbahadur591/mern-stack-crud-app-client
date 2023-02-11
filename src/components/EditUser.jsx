@@ -3,8 +3,8 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
-import { loadUserDataService , editUserService } from "../service/api";
-import {useNavigate, Link, useParams} from 'react-router-dom'
+import { loadUserDataService, editUserService } from "../service/api";
+import { useNavigate, useParams } from "react-router-dom";
 
 // changing css of mui FormGroup using styled component
 const FormCustom = styled(FormGroup)`
@@ -25,31 +25,30 @@ const EditUser = () => {
     location: "",
   };
 
-  const {id} = useParams()
+  const { id } = useParams();
 
   const [user, setUser] = useState(defaultUser);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const onValueChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const editUserDetails = async() => {
+  const editUserDetails = async () => {
     // console.log(user);
-    await editUserService(user, id)
-    navigate('/allusers')
+    await editUserService(user, id);
+    navigate("/allusers");
   };
 
-  useEffect( ()=> {
-    loadUserDetails()
-  }, [])
+  useEffect(() => {
+    loadUserDetails();
+  }, []);
 
-
-  const loadUserDetails = async () =>{
-       const response =  await loadUserDataService(id)
-       setUser(response.data[0])
+  const loadUserDetails = async () => {
+    const response = await loadUserDataService(id);
+    setUser(response.data[0]);
     //    console.log(user.age)
     //    console.log(response.data[0].age)
-  }
+  };
 
   return (
     <div>

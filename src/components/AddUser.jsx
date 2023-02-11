@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import { addUserService } from "../service/api";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 // changing css of mui FormGroup using styled component
 const FormCustom = styled(FormGroup)`
@@ -26,15 +26,15 @@ const AddUser = () => {
   };
 
   const [user, setUser] = useState(defaultUser);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const onValueChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const addUserDetails = async() => {
+  const addUserDetails = async () => {
     // console.log(user);
-    await addUserService(user)
-    navigate('/allusers')
+    await addUserService(user);
+    navigate("/allusers");
   };
 
   return (
@@ -68,6 +68,7 @@ const AddUser = () => {
             id="outlined-basic"
             label="Email"
             name="email"
+            type="email"
             variant="outlined"
             onChange={(e) => {
               onValueChange(e);
@@ -79,6 +80,7 @@ const AddUser = () => {
             id="outlined-basic"
             label="Age"
             name="age"
+            type="number"
             variant="outlined"
             onChange={(e) => {
               onValueChange(e);

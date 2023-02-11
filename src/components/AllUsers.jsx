@@ -15,20 +15,17 @@ import { Link } from "react-router-dom";
 const StyledTable = styled(Table)`
   width: 90%;
   margin: 50px auto 0 auto;
-
 `;
 
 const StyledTableRow = styled(TableRow)`
-  background : #000000;
-  color : #20b2aa;
+  background: #000000;
+  color: #20b2aa;
 
   & > th {
     font-size: 16px;
-    color : #20b2aa;
+    color: #20b2aa;
   }
-
 `;
-
 
 const AllUsers = () => {
   const [userdata, setUserData] = useState([]);
@@ -43,17 +40,17 @@ const AllUsers = () => {
     setUserData(response.data);
   };
 
-  const deleteUser = async(id) => {
-  await deleteUserService(id);
-  getUserData()
-  }
+  const deleteUser = async (id) => {
+    await deleteUserService(id);
+    getUserData();
+  };
 
   return (
     <div>
       <StyledTable>
         <TableHead>
           <StyledTableRow>
-          <TableCell>Id</TableCell>
+            <TableCell>Id</TableCell>
             <TableCell>First Name</TableCell>
             <TableCell>Last Name</TableCell>
             <TableCell>Email Id</TableCell>
@@ -63,24 +60,35 @@ const AllUsers = () => {
           </StyledTableRow>
         </TableHead>
         <TableBody>
-
-          {
-            userdata.map( user => (
-              <TableRow>
-            <TableCell>{user._id}</TableCell>
-            <TableCell>{user.firstname}</TableCell>
-            <TableCell>{user.lastname}</TableCell>
-            <TableCell>{user.email}</TableCell>
-            <TableCell>{user.age}</TableCell>
-            <TableCell>{user.location}</TableCell>
-            <TableCell>
-              <Button variant='contained' component={Link} to={`/edituser/${user._id}`} style={{marginRight : 20 }}>Edit</Button>
-              <Button variant='contained' color='secondary' onClick={() => { deleteUser(user._id)}} >Delete</Button>
-            </TableCell>
- 
-          </TableRow>
-            ))
-          }
+          {userdata.map((user) => (
+            <TableRow key={user._id}>
+              <TableCell>{user._id}</TableCell>
+              <TableCell>{user.firstname}</TableCell>
+              <TableCell>{user.lastname}</TableCell>
+              <TableCell>{user.email}</TableCell>
+              <TableCell>{user.age}</TableCell>
+              <TableCell>{user.location}</TableCell>
+              <TableCell>
+                <Button
+                  variant="contained"
+                  component={Link}
+                  to={`/edituser/${user._id}`}
+                  style={{ marginRight: 20 }}
+                >
+                  Edit
+                </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => {
+                    deleteUser(user._id);
+                  }}
+                >
+                  Delete
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </StyledTable>
     </div>
